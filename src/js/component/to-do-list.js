@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 const ToDoList = () => {
-	const [todos, setTodos] = useState([]); //1º
-	const [todosMap, setTodosMap] = useState(""); //2º variable para guardar el map
+	const [toDoList, setToDoList] = useState([]); //1º
+	const [toDoListMap, setToDoListMap] = useState(""); //2º variable para guardar el map
 
 	useEffect(() => {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/kholostyak17", {
 			method: "GET"
-			//	body: JSON.stringify(todos),
-			//headers: {
-			//	"Content-Type": "application/json"
-			//
 		})
 			.then(resp => {
 				if (!resp.ok) {
@@ -20,7 +16,7 @@ const ToDoList = () => {
 			})
 			.then(data => {
 				console.log(data);
-				setTodos(data); //1º
+				setToDoList(data); //1º
 			})
 			.catch(error => {
 				console.log(error);
@@ -28,13 +24,13 @@ const ToDoList = () => {
 	}, []);
 
 	const deleteTask = idDelete => {
-		setTodos(todos.filter((_, index) => index !== idDelete));
+		setToDoList(toDoList.filter((_, index) => index !== idDelete));
 	};
 
 	// 2º
 	useEffect(() => {
-		setTodosMap(
-			todos.map((task, index) => {
+		setToDoListMap(
+			toDoList.map((task, index) => {
 				return (
 					<li id={index} key={index.toString()}>
 						{task.label}
@@ -48,16 +44,16 @@ const ToDoList = () => {
 				);
 			})
 		);
-	}, [todos]);
-	console.log(todosMap);
+	}, [toDoList]);
+	console.log(toDoListMap);
 
 	// 4º Hacer una función para el post y para el put
 
 	useEffect(() => {
-		console.log(todos);
+		console.log(toDoList);
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/kholostyak17", {
 			method: "PUT",
-			body: JSON.stringify(todos),
+			body: JSON.stringify(toDoList),
 			headers: {
 				"Content-Type": "application/json"
 			}
@@ -76,24 +72,24 @@ const ToDoList = () => {
 			.catch(error => {
 				console.log(error);
 			});
-	}, [todos]);
+	}, [toDoList]);
 
-	// 3º {todosMap} para dibujar la lista que he realizado en el map
+	// 3º {toDoListMap} para dibujar la lista que he realizado en el map
 	return (
 		<div>
 			<input
 				type="text"
 				onKeyPress={event => {
 					if (event.key == "Enter") {
-						setTodos([
-							...todos,
+						setToDoList([
+							...toDoList,
 							{ label: event.target.value, done: false }
 						]);
 						event.target.value = "";
 					}
 				}}
 			/>
-			<ul>{todosMap}</ul>
+			<ul>{toDoListMap}</ul>
 		</div>
 	);
 };
