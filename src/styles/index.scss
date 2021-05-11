@@ -1,10 +1,10 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
 body{
-    background-color: darkseagreen;
+    background-color: rgb(51, 51, 51);
 }
 .listBox{
-    background-color: rgb(21, 13, 70);
+    background-color: #28a745;
     width: 30rem;
     height: 30rem;
     margin: 2rem auto;
@@ -16,9 +16,10 @@ body{
 }
 input{
     width: 15rem;
-    background-color: darkseagreen;
-    color: rgb(21, 13, 70);
+    background-color: white;
     font-weight: bold;
+    background-color: rgb(51, 51, 51);
+    color: white;
 }
 ul{
     padding-right: 2rem;
@@ -26,9 +27,9 @@ ul{
 li{
     list-style: none;
     border-bottom-style: solid;
-    border-color: darkseagreen;
+    border-color: white;
     border-width: 1px;
-    color: darkseagreen;
+    color: white;
     font-size: larger;
 }
 i{
