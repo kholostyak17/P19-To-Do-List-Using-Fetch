@@ -31,12 +31,11 @@ const ToDoList = () => {
 				return (
 					<li id={index} key={index.toString()}>
 						{task.label}
-						<button
+						<i
+							class="far fa-times-circle"
 							onClick={() => {
 								deleteTask(index);
-							}}>
-							X
-						</button>
+							}}></i>
 					</li>
 				);
 			})
@@ -74,22 +73,26 @@ const ToDoList = () => {
 	}, [toDoList]);
 
 	return (
-		<div className="ListBox ">
+		<div className="listBox">
 			<div className="inputBox">
 				<input
 					type="text"
 					onKeyPress={event => {
 						if (event.key == "Enter") {
-							setToDoList([
-								...toDoList,
-								{ label: event.target.value, done: false }
-							]);
+							if (event.target.value != "") {
+								setToDoList([
+									...toDoList,
+									{ label: event.target.value, done: false }
+								]);
+							}
 							event.target.value = "";
 						}
 					}}
 				/>
 			</div>
-			<ul>{toDoListMap}</ul>
+			<div className="toDoListBox bg-success">
+				<ul>{toDoListMap}</ul>
+			</div>
 		</div>
 	);
 };
