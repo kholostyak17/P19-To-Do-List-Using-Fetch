@@ -1,13 +1,40 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
-/* 
-
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
-
-*/
+body{
+    background-color: darkseagreen;
+}
+.listBox{
+    background-color: rgb(21, 13, 70);
+    width: 30rem;
+    height: 30rem;
+    margin: 2rem auto;
+}
+.inputBox{
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+}
+input{
+    width: 15rem;
+    background-color: darkseagreen;
+    color: rgb(21, 13, 70);
+    font-weight: bold;
+}
+ul{
+    padding-right: 2rem;
+}
+li{
+    list-style: none;
+    border-bottom-style: solid;
+    border-color: darkseagreen;
+    border-width: 1px;
+    color: darkseagreen;
+    font-size: larger;
+}
+i{
+    float: right;
+}
+.toDoListBox{
+    overflow-y: scroll;
+    height: 20rem;
+}
