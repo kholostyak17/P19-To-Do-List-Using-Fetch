@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 const ToDoList = () => {
-	const [toDoList, setToDoList] = useState([]); //1º
-	const [toDoListMap, setToDoListMap] = useState(""); //2º variable para guardar el map
+	const [toDoList, setToDoList] = useState([]);
+	const [toDoListMap, setToDoListMap] = useState("");
 
 	useEffect(() => {
+		//primer fetch de descarga al recargar la pagina
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/kholostyak17", {
 			method: "GET"
 		})
@@ -16,19 +17,15 @@ const ToDoList = () => {
 			})
 			.then(data => {
 				console.log(data);
-				setToDoList(data); //1º
+				setToDoList(data); //guardamos en nuestra lista lo que se encuentra en el servidor
 			})
 			.catch(error => {
 				console.log(error);
 			});
 	}, []);
 
-	const deleteTask = idDelete => {
-		setToDoList(toDoList.filter((_, index) => index !== idDelete));
-	};
-
-	// 2º
 	useEffect(() => {
+		// aqui renderizamos la lista cada vez que esta sea modificada
 		setToDoListMap(
 			toDoList.map((task, index) => {
 				return (
@@ -45,15 +42,18 @@ const ToDoList = () => {
 			})
 		);
 	}, [toDoList]);
-	console.log(toDoListMap);
 
-	// 4º Hacer una función para el post y para el put
+	const deleteTask = indexDelete => {
+		// función que devuelve una nueva lista sin el elemento que vayamos a borrar
+		setToDoList(toDoList.filter((_, index) => index !== indexDelete));
+	};
 
 	useEffect(() => {
+		// fetch put para modificar la lista
 		console.log(toDoList);
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/kholostyak17", {
 			method: "PUT",
-			body: JSON.stringify(toDoList),
+			body: JSON.stringify(toDoList), // aquí se incluye nuestra nueva lista (modificada) en el servidor
 			headers: {
 				"Content-Type": "application/json"
 			}
@@ -66,29 +66,29 @@ const ToDoList = () => {
 				return resp.json();
 			})
 			.then(data => {
-				//Aquí es donde debe comenzar tu código después de que finalice la búsqueda
-				console.log(data, "holaaaaaaaa"); //esto imprimirá en la consola el objeto exacto recibido del servidor
+				console.log(data);
 			})
 			.catch(error => {
 				console.log(error);
 			});
 	}, [toDoList]);
 
-	// 3º {toDoListMap} para dibujar la lista que he realizado en el map
 	return (
-		<div>
-			<input
-				type="text"
-				onKeyPress={event => {
-					if (event.key == "Enter") {
-						setToDoList([
-							...toDoList,
-							{ label: event.target.value, done: false }
-						]);
-						event.target.value = "";
-					}
-				}}
-			/>
+		<div className="ListBox ">
+			<div className="inputBox">
+				<input
+					type="text"
+					onKeyPress={event => {
+						if (event.key == "Enter") {
+							setToDoList([
+								...toDoList,
+								{ label: event.target.value, done: false }
+							]);
+							event.target.value = "";
+						}
+					}}
+				/>
+			</div>
 			<ul>{toDoListMap}</ul>
 		</div>
 	);
