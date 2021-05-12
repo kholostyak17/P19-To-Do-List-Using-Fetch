@@ -32,7 +32,7 @@ const ToDoList = () => {
 					<li id={index} key={index.toString()}>
 						{task.label}
 						<i
-							class="far fa-times-circle"
+							className="fas fa-trash-alt"
 							onClick={() => {
 								deleteTask(index);
 							}}></i>
@@ -77,6 +77,7 @@ const ToDoList = () => {
 			<div className="inputBox">
 				<input
 					type="text"
+					placeholder="Add a new task!"
 					onKeyPress={event => {
 						if (event.key == "Enter") {
 							if (event.target.value != "") {

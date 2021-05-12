@@ -15,9 +15,9 @@ body{
     padding: 2rem 0;
 }
 input{
-    width: 15rem;
+    width: 25rem;
     background-color: white;
-    font-weight: bold;
+    font-size: larger;
     background-color: rgb(51, 51, 51);
     color: white;
 }
@@ -31,6 +31,9 @@ li{
     border-width: 1px;
     color: white;
     font-size: larger;
+    height: 3rem;
+    padding-top: 1rem;
+    font-family: 'Courier New', Courier, monospace;
 }
 i{
     float: right;
